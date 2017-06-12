@@ -1,3 +1,5 @@
+using System.Linq;
+
 class Program
 {
 	public static void Main()
@@ -65,5 +67,106 @@ class Program
 		System.Console.Write((char)streamReader.Read());
 		System.Console.Write((char)streamReader.Read());
 		System.Console.Write((char)streamReader.Read());
+		System.Console.WriteLine();
+		System.Console.WriteLine(streamReader.ReadLine());
+		
+		System.IO.StreamReader streamReader2 = new System.IO.StreamReader(System.IO.File.OpenRead(@"D:\refs\installs\officesp2010-kb2687455-fullfile-x86-en-us.exe"));
+
+		// System.Console.WriteLine("here i am");
+		// var x = ReadToEnd(streamReader2);
+		// System.Console.WriteLine("in main");
+		// x.Wait();
+
+		System.Console.WriteLine("StreamWriter");
+
+		System.IO.FileStream newFileStream2 = new System.IO.FileStream("newfile.txt", System.IO.FileMode.Create);
+		System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(newFileStream2);
+		streamWriter.Write("hello");
+		streamWriter.Flush();
+
+		System.IO.StringReader stringReader = new System.IO.StringReader(System.IO.File.ReadAllText(@"C:\Users\filip.kucharczyk\Downloads\Poland (11).xml"));
+		System.Console.WriteLine(stringReader.ReadLine());
+
+		System.Console.WriteLine("BinaryReader");
+
+		System.IO.BinaryWriter binaryWriter = new System.IO.BinaryWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF32);
+		System.IO.BinaryReader binaryReader = new System.IO.BinaryReader(binaryWriter.BaseStream, System.Text.Encoding.UTF8);
+		
+
+		var builder = new System.Text.StringBuilder();
+		for(int i = 0; i < 1073741823/2 - 1; ++i)
+		{
+			builder.Append("a");
+		}
+
+		binaryWriter.Write(10);
+		System.Console.WriteLine("binaryWriter.Write(builder.ToString());");
+		binaryWriter.Write(builder.ToString());
+		binaryWriter.BaseStream.Position = 0;
+		System.Console.WriteLine(binaryReader.ReadInt32());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		return;
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+
+		return;
+
+		binaryWriter.Write(11);
+		binaryWriter.BaseStream.Position = 0;
+
+		memoryStream.Position = 0;
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+
+		
+		//System.Console.WriteLine(binaryReader.ReadString());
+	}
+
+	static async System.Threading.Tasks.Task ReadToEnd(System.IO.StreamReader streamReader)
+	{
+		string allText = await streamReader.ReadToEndAsync();
+		System.Console.WriteLine("after await");
 	}
 }
