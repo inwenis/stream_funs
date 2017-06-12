@@ -72,13 +72,23 @@ class Program
 		System.Console.WriteLine("here I am just before calling async ReadToEnd");
 		var task = ReadToEnd(fileStreamReader);
 		System.Console.WriteLine("here I am just after the call to ReadToEnd");
-		task.Wait();
+		//task.Wait(); //uncommenting this line causes the main thread to wait untill the 600MB file is read
 	}
 
 	static async System.Threading.Tasks.Task ReadToEnd(System.IO.StreamReader streamReader)
 	{
 		string allText = await streamReader.ReadToEndAsync();
 		System.Console.WriteLine("after await in ReadToEnd");
+	}
+
+	static void StreamWriter()
+	{
+		System.IO.FileStream newFileStream = new System.IO.FileStream("newfile.txt", System.IO.FileMode.Create);
+		System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(newFileStream);
+		streamWriter.Write("This is just some text that will be written to a file");
+		streamWriter.Flush();
+		streamWriter.Dispose();
+		System.Console.WriteLine(System.IO.File.ReadAllText("newfile.txt"));
 	}
 
 	public static void Main()
@@ -95,16 +105,16 @@ class Program
 		System.Console.WriteLine("---------------------------");
 		System.Console.WriteLine("StreamReader");
 		StreamReader();
+		System.Console.WriteLine("---------------------------");
+		System.Console.WriteLine("StreamWriter");
+		StreamWriter();
+
+
 		// //binnary, stream, string, text
 
 		
 
-		// System.Console.WriteLine("StreamWriter");
 
-		// System.IO.FileStream newFileStream2 = new System.IO.FileStream("newfile.txt", System.IO.FileMode.Create);
-		// System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(newFileStream2);
-		// streamWriter.Write("hello");
-		// streamWriter.Flush();
 
 		// System.IO.StringReader stringReader = new System.IO.StringReader(System.IO.File.ReadAllText(@"C:\Users\filip.kucharczyk\Downloads\Poland (11).xml"));
 		// System.Console.WriteLine(stringReader.ReadLine());
