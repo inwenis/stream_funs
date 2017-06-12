@@ -41,6 +41,20 @@ class Program
 		System.Console.WriteLine(bytesFromStreamAsString);
 	}
 
+	static void GzipStream()
+	{
+		System.IO.FileStream newFileStream = new System.IO.FileStream("compressed.gz", System.IO.FileMode.Create);
+		System.IO.Compression.GZipStream gZipStream =
+			new System.IO.Compression.GZipStream(newFileStream, System.IO.Compression.CompressionLevel.Fastest);
+		byte[] bytes = System.Text.Encoding.Unicode.GetBytes("This is some text that will be compressed");
+		gZipStream.Write(bytes, 0, bytes.Length);
+		gZipStream.Dispose();
+		System.IO.Compression.GZipStream decompressStream =
+			new System.IO.Compression.GZipStream(System.IO.File.OpenRead("compressed.gz"), System.IO.Compression.CompressionMode.Decompress);
+		System.IO.StreamReader streamReader = new System.IO.StreamReader(decompressStream, System.Text.Encoding.Unicode);
+		System.Console.WriteLine(streamReader.ReadToEnd());
+	}
+
 	public static void Main()
 	{
 		System.Console.WriteLine("---------------------------");
@@ -51,16 +65,7 @@ class Program
 		MemoryStream();
 		System.Console.WriteLine("---------------------------");
 		System.Console.WriteLine("GzipStream");
-		
-		// System.Console.WriteLine();
-		// System.Console.WriteLine("Gzip Stream");
-
-		// System.IO.FileStream newFileStream = new System.IO.FileStream("compressed.gz", System.IO.FileMode.Create);
-		// System.IO.Compression.GZipStream gZipStream =
-		// 	new System.IO.Compression.GZipStream(newFileStream, System.IO.Compression.CompressionLevel.Fastest);
-		// gZipStream.Write(bytes, 0, bytes.Length);
-		// gZipStream.Dispose();
-		// System.Console.WriteLine("The End");
+		GzipStream();
 
 		// //binnary, stream, string, text
 		// System.Console.WriteLine();
