@@ -55,6 +55,32 @@ class Program
 		System.Console.WriteLine(streamReader.ReadToEnd());
 	}
 
+	static void StreamReader()
+	{
+		System.IO.MemoryStream memoryStream = new System.IO.MemoryStream(System.Text.Encoding.Unicode.GetBytes("hello world :)"));
+		// System.IO.StreamReader memoryStreamReader = new System.IO.StreamReader(memoryStream, System.Text.Encoding.UTF8);
+		System.IO.StreamReader memoryStreamReader = new System.IO.StreamReader(memoryStream, System.Text.Encoding.Unicode);
+		System.Console.Write((char)memoryStreamReader.Read());
+		System.Console.Write((char)memoryStreamReader.Read());
+		System.Console.Write((char)memoryStreamReader.Read());
+		System.Console.Write((char)memoryStreamReader.Read());
+		System.Console.WriteLine();
+		System.Console.WriteLine(memoryStreamReader.ReadLine());
+
+		System.IO.StreamReader fileStreamReader =
+			new System.IO.StreamReader(System.IO.File.OpenRead(@"D:\refs\installs\officesp2010-kb2687455-fullfile-x86-en-us.exe"));
+		System.Console.WriteLine("here I am just before calling async ReadToEnd");
+		var task = ReadToEnd(fileStreamReader);
+		System.Console.WriteLine("here I am just after the call to ReadToEnd");
+		task.Wait();
+	}
+
+	static async System.Threading.Tasks.Task ReadToEnd(System.IO.StreamReader streamReader)
+	{
+		string allText = await streamReader.ReadToEndAsync();
+		System.Console.WriteLine("after await in ReadToEnd");
+	}
+
 	public static void Main()
 	{
 		System.Console.WriteLine("---------------------------");
@@ -66,29 +92,12 @@ class Program
 		System.Console.WriteLine("---------------------------");
 		System.Console.WriteLine("GzipStream");
 		GzipStream();
-
+		System.Console.WriteLine("---------------------------");
+		System.Console.WriteLine("StreamReader");
+		StreamReader();
 		// //binnary, stream, string, text
-		// System.Console.WriteLine();
-		// System.Console.WriteLine("Stream Reader");
 
-		// memoryStream.Position = 0;
-		// // System.IO.StreamReader streamReader = new System.IO.StreamReader(memoryStream, System.Text.Encoding.UTF8);
-		// System.IO.StreamReader streamReader = new System.IO.StreamReader(memoryStream, System.Text.Encoding.Unicode);
-		// // System.IO.StreamReader streamReader = new System.IO.StreamReader(memoryStream);
 		
-		// System.Console.Write((char)streamReader.Read());
-		// System.Console.Write((char)streamReader.Read());
-		// System.Console.Write((char)streamReader.Read());
-		// System.Console.Write((char)streamReader.Read());
-		// System.Console.WriteLine();
-		// System.Console.WriteLine(streamReader.ReadLine());
-		
-		// System.IO.StreamReader streamReader2 = new System.IO.StreamReader(System.IO.File.OpenRead(@"D:\refs\installs\officesp2010-kb2687455-fullfile-x86-en-us.exe"));
-
-		// // System.Console.WriteLine("here i am");
-		// // var x = ReadToEnd(streamReader2);
-		// // System.Console.WriteLine("in main");
-		// // x.Wait();
 
 		// System.Console.WriteLine("StreamWriter");
 
@@ -175,11 +184,5 @@ class Program
 
 		
 		// //System.Console.WriteLine(binaryReader.ReadString());
-	}
-
-	static async System.Threading.Tasks.Task ReadToEnd(System.IO.StreamReader streamReader)
-	{
-		string allText = await streamReader.ReadToEndAsync();
-		System.Console.WriteLine("after await");
 	}
 }
