@@ -91,10 +91,46 @@ class Program
 		System.Console.WriteLine(System.IO.File.ReadAllText("newfile.txt"));
 	}
 
+	static void StringReader()
+	{
+		System.IO.StringReader stringReader =
+			new System.IO.StringReader(System.IO.File.ReadAllText(@"C:\Users\filip.kucharczyk\Downloads\Poland (11).xml"));
+		System.Console.WriteLine(stringReader.ReadLine());
+	}
+
+	static void BinaryReaderWriter()
+	{
+		System.IO.BinaryWriter binaryWriter = new System.IO.BinaryWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF32);
+		System.IO.BinaryReader binaryReader = new System.IO.BinaryReader(binaryWriter.BaseStream, System.Text.Encoding.UTF8);
+		var stringBuilder = new System.Text.StringBuilder();
+		for(int i = 0; i < 1073741823/3; ++i)
+		{
+			stringBuilder.Append("a");
+		}
+		binaryWriter.Write(10);
+		System.Console.WriteLine("binaryWriter.Write(stringBuilder.ToString());");
+		binaryWriter.Write(stringBuilder.ToString());
+		binaryWriter.BaseStream.Position = 0;
+		System.Console.WriteLine(binaryReader.ReadInt32());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+		System.Console.WriteLine(binaryReader.ReadByte());
+	}
+
 	public static void Main()
 	{
 		System.Console.WriteLine("---------------------------");
-		System.Console.WriteLine("FileStream");
+		System.Console.WriteLine("FileStream And BufferedStream");
 		FileStreamAndBufferedStream();
 		System.Console.WriteLine("---------------------------");
 		System.Console.WriteLine("MemoryStream");
@@ -108,91 +144,11 @@ class Program
 		System.Console.WriteLine("---------------------------");
 		System.Console.WriteLine("StreamWriter");
 		StreamWriter();
-
-
-		// //binnary, stream, string, text
-
-		
-
-
-
-		// System.IO.StringReader stringReader = new System.IO.StringReader(System.IO.File.ReadAllText(@"C:\Users\filip.kucharczyk\Downloads\Poland (11).xml"));
-		// System.Console.WriteLine(stringReader.ReadLine());
-
-		// System.Console.WriteLine("BinaryReader");
-
-		// System.IO.BinaryWriter binaryWriter = new System.IO.BinaryWriter(new System.IO.MemoryStream(), System.Text.Encoding.UTF32);
-		// System.IO.BinaryReader binaryReader = new System.IO.BinaryReader(binaryWriter.BaseStream, System.Text.Encoding.UTF8);
-		
-
-		// var builder = new System.Text.StringBuilder();
-		// for(int i = 0; i < 1073741823/2 - 1; ++i)
-		// {
-		// 	builder.Append("a");
-		// }
-
-		// binaryWriter.Write(10);
-		// System.Console.WriteLine("binaryWriter.Write(builder.ToString());");
-		// binaryWriter.Write(builder.ToString());
-		// binaryWriter.BaseStream.Position = 0;
-		// System.Console.WriteLine(binaryReader.ReadInt32());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// return;
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-
-		// return;
-
-		// binaryWriter.Write(11);
-		// binaryWriter.BaseStream.Position = 0;
-
-		// memoryStream.Position = 0;
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-		// System.Console.WriteLine(binaryReader.ReadByte());
-
-		
-		// //System.Console.WriteLine(binaryReader.ReadString());
+		System.Console.WriteLine("---------------------------");
+		System.Console.WriteLine("StringReader");
+		StringReader();
+		System.Console.WriteLine("---------------------------");
+		System.Console.WriteLine("BinaryReader/Writer");
+		BinaryReaderWriter();
 	}
 }
